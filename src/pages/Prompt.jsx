@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "/prompt.css";
 export default function Prompt() {
   const [habitDescription, setHabitDescription] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(30);
