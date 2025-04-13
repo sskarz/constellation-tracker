@@ -1,0 +1,44 @@
+.centered-button {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    /* fully rounded (rounded-full) */
+    transition: all 0.3s ease;
+    /* duration-300 and transition-all */
+    outline: none;
+    /* focus:outline-none */
+}
+
+.centered-button:focus {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    /* focus:ring-2 focus:ring-white focus:ring-opacity-50 */
+}
+
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    /* bottom-full */
+    left: 50%;
+    /* left-1/2 */
+    transform: translate(-50%, -0.5rem);
+    /* -translate-x-1/2, -translate-y-2 (0.5rem = 8px) */
+    background-color: #1e293b;
+    /* bg-slate-800 */
+    color: white;
+    /* text-white */
+    font-size: 0.75rem;
+    /* text-xs */
+    padding: 0.25rem 0.5rem;
+    /* px-2 py-1 */
+    border-radius: 0.25rem;
+    /* rounded */
+    white-space: nowrap;
+    /* whitespace-nowrap */
+}
+
+
+.custom-box {
+    position: relative;
+    width: 100%;
+}
