@@ -18,15 +18,15 @@ function App() {
       alignItems: 'center',
     }}>
       <div style={{
-        width: '80vw',
-        height: '80vh',
+        width: '70vw',
+        height: '70vh',
         borderColor: 'white',
         borderWidth: '10px',
-        backgroundColor: 'black',
+        
         // border: '1px dashed white', // Uncomment if you want to see it
       }}>
         
-        <ConstellationTracker days={30}/>
+        <ConstellationTracker days={6}/>
       </div>
     </div>
   );

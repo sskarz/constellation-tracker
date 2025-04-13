@@ -134,29 +134,32 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
         </div>
 
         {/* Background stars */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          overflow: 'hidden',
-        }}>
-          {Array.from({ length: 100 }).map((_, i) => (
-            <div
-              key={`bg-star-${i}`}
-              className="absolute w-px h-px bg-white rounded-full opacity-70"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 5}s`,
-        
-              }
-              
-              }
-            />
-          ))}
-        </div>
+<div style={{
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+  overflow: 'hidden',
+}}>
+  {Array.from({ length: 100 }).map((_, i) => (
+    <div
+      key={`bg-star-${i}`}
+      style={{
+        position: 'absolute',
+        width: '1px',
+        height: '1px',
+        backgroundColor: 'white',
+        borderRadius: '50%',
+        opacity: 0.7,
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 5}s`,
+      }}
+    />
+  ))}
+</div>
+
       </div>
 
       {/* Controls */}
