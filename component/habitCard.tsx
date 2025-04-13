@@ -2,70 +2,194 @@ import React from "react";
 import { useState, useEffect } from "react";
 import StarNode from "./star-node.tsx";
 
+// Base URL for the backend API
+const API_BASE_URL = "http://localhost:3000";
+
 interface ConstellationTrackerProps {
-  days: number;
+  habitId: string; // Added habitId prop to identify which habit to fetch
+}
+
+interface Point {
+  x: number;
+  y: number;
+}
+
+interface HabitData {
+  habitName: string;
+  constellationType: string;
+  totalDays: number;
+  description: string;
+  dayNodes: {
+    [key: string]: {
+      x: number;
+      y: number;
+      activated: boolean;
+    };
+  };
 }
 
 export default function ConstellationTracker({
-  days,
+  habitId,
 }: ConstellationTrackerProps) {
+  const [habitData, setHabitData] = useState<HabitData | null>(null);
   const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
   const [allCompleted, setAllCompleted] = useState(false);
-  const [points, setPoints] = useState<Array<{ x: number; y: number }>>([]);
+  const [points, setPoints] = useState<Array<Point>>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  // Fetch habit data from the backend
   useEffect(() => {
-    // Generate constellation points based on viewport size
-    setPoints([
 
-      { x: 10, y: 40}, 
-      { x: 60, y: 45 }, 
-      { x: 80, y: 60 },
-      { x: 90, y: 80},
-      
-       
- 
+    const fetchHabitData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `${API_BASE_URL}/getHabit?habitId=${habitId}`
+        );
 
-    // Check if we have saved progress in localStorage
-    //Will be replaced
-    const savedProgress = localStorage.getItem("constellationProgress");
-    if (savedProgress) {
-      setCompletedDays(new Set(JSON.parse(savedProgress)));
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch habit data: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(data.error || "Failed to fetch habit data");
+        }
+
+        setHabitData(data.habit);
+
+        // Extract points and completed days from habit data
+        const newPoints: Point[] = [];
+        const newCompletedDays = new Set<number>();
+
+        // Convert dayNodes object into arrays for our component
+        Object.entries(data.habit.dayNodes).forEach(
+          ([nodeKey, nodeData]: [string, any], index) => {
+            const dayNumber = parseInt(nodeKey.replace("node", ""));
+
+            newPoints.push({
+              x: nodeData.x,
+              y: nodeData.y,
+            });
+
+            if (nodeData.activated) {
+              newCompletedDays.add(dayNumber);
+            }
+          }
+        );
+
+        setPoints(newPoints);
+        setCompletedDays(newCompletedDays);
+        setLoading(false);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unknown error occurred");
+        setLoading(false);
+      }
+    };
+
+    if (habitId) {
+      fetchHabitData();
     }
-  }, [days]);
+  }, [habitId]);
 
+  // Check if all days are completed
   useEffect(() => {
-    // Check if all days are completed
-    if (completedDays.size === days && days > 0) {
+    if (
+      habitData &&
+      completedDays.size === habitData.totalDays &&
+      habitData.totalDays > 0
+    ) {
       setAllCompleted(true);
     } else {
       setAllCompleted(false);
     }
+  }, [completedDays, habitData]);
 
-    // Save progress to localStorage
-    if (completedDays.size > 0) {
-      localStorage.setItem(
-        "constellationProgress",
-        JSON.stringify([...completedDays])
+  const toggleDay = async (day: number) => {
+    try {
+      // Call backend to toggle node status
+      const response = await fetch(
+        `${API_BASE_URL}/habit/${habitId}/toggleNode`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ nodeNumber: day }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to update node: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to update node");
+      }
+
+      // Update local state based on response
+      const newCompletedDays = new Set(completedDays);
+
+      if (data.activated) {
+        newCompletedDays.add(day);
+      } else {
+        newCompletedDays.delete(day);
+      }
+
+      setCompletedDays(newCompletedDays);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to update progress"
       );
     }
-  }, [completedDays, days]);
+  };
 
-  const toggleDay = (day: number) => {
-    const newCompletedDays = new Set(completedDays);
+  const resetProgress = async () => {
+    try {
+      // Reset all nodes to not activated
+      const resetPromises = Array.from(
+        { length: habitData?.totalDays || 0 },
+        (_, i) => {
+          const day = i + 1;
+          // Only reset if the day is currently completed
+          if (completedDays.has(day)) {
+            return fetch(`${API_BASE_URL}/habit/${habitId}/toggleNode`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ nodeNumber: day }),
+            });
+          }
+          return Promise.resolve();
+        }
+      );
 
-    if (newCompletedDays.has(day)) {
-      newCompletedDays.delete(day);
-    } else {
-      newCompletedDays.add(day);
+      await Promise.all(resetPromises);
+
+      // Clear local state
+      setCompletedDays(new Set());
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to reset progress");
     }
-
-    setCompletedDays(newCompletedDays);
   };
 
-  const resetProgress = () => {
-    setCompletedDays(new Set());
-    localStorage.removeItem("constellationProgress");
-  };
+  if (loading) {
+    return <div>Loading habit tracker...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!habitData) {
+    return <div>No habit data found</div>;
+  }
 
   return (
 
@@ -83,7 +207,6 @@ export default function ConstellationTracker({
           position: "relative",
           backgroundColor: "transparent", // slate-900
           borderRadius: "0.5rem", // rounded-lg
-          //border: '1px solid #1e293b', // border-slate-800
           aspectRatio: "4 / 4",
           width: "100%",
           overflow: "hidden",
@@ -122,7 +245,7 @@ export default function ConstellationTracker({
                   }
                   strokeWidth="0.2"
                   style={{
-                    transition: "all 1s", // 'duration-1000' corresponds to a 1000ms transition duration
+                    transition: "all 1s",
                   }}
                 />
               );
@@ -156,8 +279,13 @@ export default function ConstellationTracker({
       {/* Controls */}
       <div style={{ position: "relative" }}>
         <div className="text-slate-300">
-          <span className="font-bold text-white">{completedDays.size}</span> of{" "}
-          <span className="font-bold text-white">{days}</span> days completed
+          <h3>{habitData.habitName}</h3>
+          <p>{habitData.description}</p>
+          <span className="font-bold text-white">
+            {completedDays.size}
+          </span> of{" "}
+          <span className="font-bold text-white">{habitData.totalDays}</span>{" "}
+          days completed
         </div>
         <button onClick={resetProgress}>Reset Progress</button>
       </div>
