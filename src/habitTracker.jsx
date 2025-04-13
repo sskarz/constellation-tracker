@@ -39,7 +39,22 @@ function habitTracker() {
               }s ease-in-out infinite ${Math.random() * 3}s`,
             }}
           />
-        ))}
+       ))}
+         <style>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-in-out;
+        }
+      `}</style>
       </div>
 
       <div
@@ -59,17 +74,25 @@ function habitTracker() {
           margin: 1,
           //border: '3px solid green'
           // border: '1px dashed white', // Uncomment if you want to see it
-        }}
-      >
-        <ConstellationTracker days={6} />
-      </div>
 
-      <div
-        style={{
-          flex: 1,
-        }}
-      ></div>
-    </div>
+        }}>
+          <ConstellationTracker days={6} />
+      </div>
+      
+      <div style={{
+        flex: 1,
+        paddingLeft: '1rem', 
+        paddingRight: '1rem',
+      }}>
+          <HabitDetails/>
+      </div>
+       
+      </div>
+    
+       
+      
+   
+
   );
 }
 export default habitTracker;
