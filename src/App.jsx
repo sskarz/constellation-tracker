@@ -15,10 +15,10 @@ function App() {
         <Routes>
           <Route path = "/home" element={<Home />}/>
           <Route path = "/prompt" element={<Prompt />}/>
-          <Route path = "/details" element={<Details />}/>
+          <Route path="/details" element={<Details />} />
+          <Route path = "/habit" element={<HabitMap />}/>
         </Routes>
       </div>
-      <HabitMap />
     </>
   );
 }

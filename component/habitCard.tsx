@@ -68,7 +68,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
   }
 
   return (
-    <div  style={{ position: 'relative', width: '100%', height:'100%' }}>
+    <div  style={{ position: 'relative', width: '100%', height:'100%' ,border: '1px solid red'}}>
       <div
         style={{
           position: 'relative',
@@ -88,9 +88,11 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
           position: 'absolute',
           inset: '0',
           width: '100%',
-          height: '100%',
+            height: '100%',
+          
         }}
           viewBox="0 0 100 100"
+           preserveAspectRatio="xMidYMid meet"
         >
           {points.length > 1 &&
             points.map((point, index) => {
@@ -103,7 +105,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
                   y1={point.y}
                   x2={points[index + 1].x}
                   y2={points[index + 1].y}
-                  stroke={allCompleted ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.1)"}
+                  stroke={allCompleted ? "rgba(226, 214, 214, 0.6)" : "rgba(255, 255, 255, 0.28)"}
                   strokeWidth="0.2"
                   style={{
                     transition: 'all 1s', // 'duration-1000' corresponds to a 1000ms transition duration
@@ -139,7 +141,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
     </div>
 
       {/* Controls */}
-      <div >
+      <div  style = {{position: 'relative',}}>
         <div className="text-slate-300">
           <span className="font-bold text-white">{completedDays.size}</span> of{" "}
           <span className="font-bold text-white">{days}</span> days completed
@@ -151,12 +153,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
         </button>
       </div>
 
-      {allCompleted && (
-        <div className="mt-6 p-4 bg-slate-800 rounded-lg text-center text-white animate-fadeIn">
-          <h2 className="text-xl font-bold mb-2">Congratulations! 🎉</h2>
-          <p>You've completed all {days} days of your challenge!</p>
-        </div>
-      )}
+    
 
       <style>{`
         @keyframes twinkle {

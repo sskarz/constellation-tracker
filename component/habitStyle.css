@@ -46,3 +46,13 @@
     position: relative;
     width: 100%;
 }
+
+
+.terminal-text {
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: .8rem;
+    color: #00ff00;
+    background-color: #000;
+    padding: 1rem;
+    border-radius: 6px;
+}
