@@ -10,7 +10,8 @@ export default function Navbar(){
                 <ul>
                   <CustomLink to="/home">Home</CustomLink>
                   <CustomLink to="/prompt">Prompt Page</CustomLink>
-                  <CustomLink to="/details">Details Page</CustomLink>
+                <CustomLink to="/details">Details Page</CustomLink>
+                <CustomLink to="/habit">Habit</CustomLink>
                 </ul>
             <hr></hr>
         </nav>
