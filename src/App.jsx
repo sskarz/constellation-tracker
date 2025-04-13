@@ -21,19 +21,20 @@ function App() {
       alignItems: 'center',
       
     }}>
-      {Array.from({ length: 100 }).map((_, i) => (
+      {Array.from({ length: 1000 }).map((_, i) => (
           <div
             key={`bg-star-${i}`}
             style={{
               position: 'absolute',
-              width: '1px',
-              height: '1px',
+              width: '3px',
+              height: '3px',
               backgroundColor: 'white',
               borderRadius: '50%',
               opacity: 0.7,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 5}s`,
+              top: `${Math.random() * 110}%`,
+              
+              left: `${Math.random() * 110}%`,
+              animation: `twinkle ${1+ Math.random() * 1}s ease-in-out infinite ${Math.random() * 5}s`,
             }}
           />
         ))}
@@ -48,9 +49,9 @@ function App() {
 
       {/*Container For Constailation*/}
       <div style={{
-        width: '60%',
-        height: '60%',
-        border: '3px solid white'
+        width: '30%',
+        height: '30%',
+        //border: '3px solid red'
         // border: '1px dashed white', // Uncomment if you want to see it
       }}>
         <ConstellationTracker days={6}/>

@@ -72,9 +72,9 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
       <div
         style={{
           position: 'relative',
-          backgroundColor: '#0f172a', // slate-900
+          backgroundColor: 'transparent', // slate-900
           borderRadius: '0.5rem', // rounded-lg
-          border: '1px solid #1e293b', // border-slate-800
+          //border: '1px solid #1e293b', // border-slate-800
           aspectRatio: '4 / 4',
           width: '100%',
           overflow: 'hidden',
@@ -84,11 +84,11 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
       >
         {/* Constellation lines */}
        <svg
-        style={{
-          position: 'absolute',
-          inset: '0',
-          width: '100%',
-          height: '100%',
+          style={{
+            position: 'absolute',
+            inset: '0',
+            //border: '3px solid white'
+          
         }}
           viewBox="0 0 100 100"
         >
@@ -111,9 +111,12 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
                 />
               )
             })}
+          
+
+          
         </svg>
 
-        {/* Stars/ Nodes */}
+         {/* Stars/ Nodes */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -134,7 +137,9 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
           ))}
         </div>
 
-        {/* Background stars */}
+       
+
+        {/* Background stars 
         <div style={{
           position: 'absolute',
           top: 0,
@@ -160,6 +165,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
           />
         ))}
       </div>
+      */}
 
     </div>
 
