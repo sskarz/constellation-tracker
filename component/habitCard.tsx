@@ -253,8 +253,6 @@ export default function ConstellationTracker({
   }
 
   return (
-
-
     <div
       style={{
         position: "relative",
@@ -262,7 +260,25 @@ export default function ConstellationTracker({
         height: "100%",
       }}
     >
-
+      <div
+         style={{
+          color: 'white',
+          paddingTop: '10%'
+      }}
+        className="text-slate-300"
+       >
+        <h3
+          style={{
+            paddingTop: '10',
+            color: 'white',
+        }}>{habitData.habitName}</h3>
+        <p>{habitData.description}</p>
+        <span className="font-bold text-white">
+          {completedDays.size}
+        </span> of{" "}
+        <span className="font-bold text-white">{habitData.totalDays}</span>{" "}
+        days completed
+      </div>
       <div
         style={{
           position: "relative",
@@ -338,20 +354,24 @@ export default function ConstellationTracker({
       </div>
 
       {/* Controls */}
-      <div style={{ position: "relative" }}>
-        <div className="text-slate-300">
-          <h3>{habitData.habitName}</h3>
-          <p>{habitData.description}</p>
-          <span className="font-bold text-white">
-            {completedDays.size}
-          </span> of{" "}
-          <span className="font-bold text-white">{habitData.totalDays}</span>{" "}
-          days completed
-        </div>
-        <button onClick={resetProgress}>Reset Progress</button>
+      <div style={{
+        position: "relative",
+        display: 'flex', 
+        flexDirection: 'column',
+        paddingTop: '30px'
+        
+      }}>
+
+        <button
+          style={{
+            backgroundColor: 'transparent',
+            boxShadow: "0 0 60px 10px rgba(239, 228, 228, 0.2)",
+            color: 'white'
+          }}
+          onClick={resetProgress}>
+          Reset Progress
+        </button>
       </div>
-
-
     </div>
   );
 }

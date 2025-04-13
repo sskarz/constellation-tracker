@@ -83,7 +83,10 @@ function HabitDetails() {
         flexDirection: "column",
         height: "100%",
         maxHeight: "500px",
-        width: "100%",
+          width: "100%",
+          justifyContent: 'center',
+          alignContent: 'center',
+          alignItems: 'center'
       }}
     >
       <div

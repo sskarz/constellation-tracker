@@ -16,12 +16,13 @@ function HabitTracker() {
         height: "100vh",
         width: "100vw",
         backgroundColor: "#0f172a",
-        overflow: "hidden",
+        overflowY: 'auto',
         position: "relative",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
+
       }}
     >
       <div>
@@ -30,13 +31,14 @@ function HabitTracker() {
             key={`bg-star-${i}`}
             style={{
               position: "absolute",
-              width: "2px",
-              height: "2px",
+              width: "3px",
+              height: "3px",
               backgroundColor: "white",
               borderRadius: "50%",
               opacity: 0.7,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 200}%`,
+              left: `${Math.random() *100}%`,
+            
               animation: `twinkle ${
                 1 + Math.random() * 1
               }s ease-in-out infinite ${Math.random() * 3}s`,
@@ -65,6 +67,9 @@ function HabitTracker() {
         style={{
           flex: 2,
           margin: 1,
+          height: '100%',
+          paddingLeft: '5%',
+          
           //border: '3px solid green'
           // border: '1px dashed white', // Uncomment if you want to see it
         }}
@@ -76,7 +81,7 @@ function HabitTracker() {
         style={{
           flex: 1,
           paddingLeft: "1rem",
-          paddingRight: "1rem",
+          paddingRight: "4rem",
         }}
       >
         <HabitDetails />
