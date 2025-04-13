@@ -2,10 +2,13 @@ import "../component/habitCard.tsx";
 import ConstellationTracker from "../component/habitCard.tsx";
 import "../component/star-node.tsx";
 import HabitDetails from "../component/habitDetails.tsx";
-("../component/HabitDetails.tsx");
+import { useSearchParams } from "react-router-dom";
 import "./index.css";
 
-function habitTracker() {
+function HabitTracker() {
+  const [searchParams] = useSearchParams();
+  const habitId = searchParams.get("habitId") || "none"; // Fallback to default if not provided
+
   return (
     //Out Div is the webpage itsel
     <div
@@ -61,7 +64,7 @@ function habitTracker() {
           // border: '1px dashed white', // Uncomment if you want to see it
         }}
       >
-        <ConstellationTracker days={6} />
+        <ConstellationTracker habitId={habitId} />
       </div>
 
       <div
@@ -72,4 +75,4 @@ function habitTracker() {
     </div>
   );
 }
-export default habitTracker;
+export default HabitTracker;
