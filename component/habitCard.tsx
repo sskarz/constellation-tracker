@@ -72,7 +72,6 @@ export default function ConstellationTracker({
         position: "relative",
         width: "100%",
         height: "100%",
-        border: "1px solid red",
       }}
     >
       <div

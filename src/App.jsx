@@ -16,6 +16,7 @@ function App() {
           <Route path="/prompt" element={<Prompt />} />
           <Route path="/details" element={<Details />} />
           <Route path="/habitTracker" element={<HabitMap />} />
+          <Route path = "/habitTracker" element={<HabitMap />}/>
         </Routes>
       </div>
     </>
