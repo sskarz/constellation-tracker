@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "/prompt.css";
 export default function Prompt() {
   const [habitDescription, setHabitDescription] = useState("");
-  const [numberOfDays, setNumberOfDays] = useState(30);
+  const [numberOfDays, setNumberOfDays] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -164,6 +164,5 @@ export default function Prompt() {
         </div>
       )}
     </div>
-    
   );
 }
