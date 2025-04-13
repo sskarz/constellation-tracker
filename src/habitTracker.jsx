@@ -6,7 +6,7 @@ import StarNode from '../component/star-node.tsx'
 import './index.css'
 
 //sad significatn change
-function App() {
+function habitTracker() {
 
   return (
     //Out Div is the webpage itsel
@@ -65,4 +65,4 @@ function App() {
   
 }
 
-export default App
+export default habitTracker
