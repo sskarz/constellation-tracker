@@ -58,6 +58,41 @@ export default function Prompt() {
       <h1 className="text-2xl font-bold mb-6">
         Create Your Habit Constellation
       </h1>
+      <div>
+        {Array.from({ length: 800 }).map((_, i) => (
+          <div
+            key={`bg-star-${i}`}
+            style={{
+              position: "absolute",
+              width: "2px",
+              height: "2px",
+              backgroundColor: "white",
+              borderRadius: "50%",
+              opacity: 0.7,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `twinkle ${
+                1 + Math.random() * 1
+              }s ease-in-out infinite ${Math.random() * 3}s`,
+            }}
+          />
+        ))}
+        <style>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-in-out;
+        }
+      `}</style>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -129,5 +164,6 @@ export default function Prompt() {
         </div>
       )}
     </div>
+    
   );
 }
