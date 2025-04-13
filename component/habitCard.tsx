@@ -29,6 +29,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
   ])
 
     // Check if we have saved progress in localStorage
+    //Will be replaced 
     const savedProgress = localStorage.getItem("constellationProgress")
     if (savedProgress) {
       setCompletedDays(new Set(JSON.parse(savedProgress)))
@@ -67,7 +68,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
   }
 
   return (
-    <div  style={{ position: 'relative', width: '100%' }}>
+    <div  style={{ position: 'relative', width: '100%', height:'100%' }}>
       <div
         style={{
           position: 'relative',
@@ -112,7 +113,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
             })}
         </svg>
 
-        {/* Stars */}
+        {/* Stars/ Nodes */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -142,32 +143,34 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
           left: 0,
           overflow: 'hidden',
         }}>
-          {Array.from({ length: 100 }).map((_, i) => (
-            <div
-              key={`bg-star-${i}`}
-              className="absolute w-px h-px bg-white rounded-full opacity-70"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 5}s`,
-        
-              }
-              
-              }
-            />
-          ))}
-        </div>
+        {Array.from({ length: 100 }).map((_, i) => (
+          <div
+            key={`bg-star-${i}`}
+            style={{
+              position: 'absolute',
+              width: '1px',
+              height: '1px',
+              backgroundColor: 'white',
+              borderRadius: '50%',
+              opacity: 0.7,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 5}s`,
+            }}
+          />
+        ))}
       </div>
 
+    </div>
+
       {/* Controls */}
-      <div className="mt-6 flex justify-between items-center">
+      <div >
         <div className="text-slate-300">
           <span className="font-bold text-white">{completedDays.size}</span> of{" "}
           <span className="font-bold text-white">{days}</span> days completed
         </div>
         <button
           onClick={resetProgress}
-          className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-md transition-colors"
         >
           Reset Progress
         </button>
