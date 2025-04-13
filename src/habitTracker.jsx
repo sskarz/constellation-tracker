@@ -42,8 +42,8 @@ function HabitTracker() {
               }s ease-in-out infinite ${Math.random() * 3}s`,
             }}
           />
-       ))}
-         <style>{`
+        ))}
+        <style>{`
         @keyframes twinkle {
           0%, 100% { opacity: 0.3; }
           50% { opacity: 1; }
@@ -60,16 +60,6 @@ function HabitTracker() {
       `}</style>
       </div>
 
-      <div
-        style={{
-          flex: 1,
-          paddingLeft: "1rem",
-          paddingRight: "1rem",
-        }}
-      >
-        <HabitDetails />
-      </div>
-
       {/*Container For Constailation*/}
       <div
         style={{
@@ -82,21 +72,16 @@ function HabitTracker() {
         <ConstellationTracker habitId={habitId} />
       </div>
 
-      
-      <div style={{
-        flex: 1,
-        paddingLeft: '1rem', 
-        paddingRight: '1rem',
-      }}>
-          <HabitDetails/>
+      <div
+        style={{
+          flex: 1,
+          paddingLeft: "1rem",
+          paddingRight: "1rem",
+        }}
+      >
+        <HabitDetails />
       </div>
-       
-      </div>
-    
-       
-      
-   
-
+    </div>
   );
 }
 export default HabitTracker;
