@@ -12,6 +12,7 @@ interface ConstellationTrackerProps {
 interface Point {
   x: number;
   y: number;
+  isMainNode?: Boolean
 }
 
 interface HabitData {
@@ -38,6 +39,24 @@ export default function ConstellationTracker({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const interpolatePoints = (
+  point1: { x: number; y: number },
+  point2: { x: number; y: number },
+  numIntermediatePoints: number
+  ): Array<{ x: number; y: number; isMainNode: boolean }> => {
+  const intermediatePoints: Array<{ x: number; y: number; isMainNode: boolean }> = [];
+    
+    for (let i = 1; i < numIntermediatePoints + 1; i++) {
+      const ratio = i / (numIntermediatePoints + 1);
+      const x = point1.x + (point2.x - point1.x) * ratio;
+      const y = point1.y + (point2.y - point1.y) * ratio;
+      intermediatePoints.push({x, y, isMainNode: false });
+    }
+    
+    return intermediatePoints;
+  }
+
+
   // Fetch habit data from the backend
   useEffect(() => {
 
@@ -47,7 +66,6 @@ export default function ConstellationTracker({
         const response = await fetch(
           `${API_BASE_URL}/getHabit?habitId=${habitId}`
         );
-
 
         if (!response.ok) {
           throw new Error(`Failed to fetch habit data: ${response.statusText}`);
@@ -62,7 +80,8 @@ export default function ConstellationTracker({
         setHabitData(data.habit);
 
         // Extract points and completed days from habit data
-        const newPoints: Point[] = [];
+       
+         let newPoints: Array<{ x: number; y: number; isMainNode?: boolean }> = [];
         const newCompletedDays = new Set<number>();
 
         // Convert dayNodes object into arrays for our component
@@ -73,6 +92,7 @@ export default function ConstellationTracker({
             newPoints.push({
               x: nodeData.x,
               y: nodeData.y,
+              isMainNode:true,
             });
 
             if (nodeData.activated) {
@@ -81,7 +101,47 @@ export default function ConstellationTracker({
           }
         );
 
-        setPoints(newPoints);
+
+        let allPoints: Array<{ x: number; y: number; isMainNode?: boolean }> = [];
+        let conPattern= 2
+        if (conPattern< newPoints.length ){
+           conPattern = newPoints.length -conPattern
+        }
+
+
+       
+        const numberOfPairs = newPoints.length- 1;
+        const nodesToInsert = newPoints.length- conPattern
+        //const numIntermediatePoints = 2; // This will add 2 nodes between each main node
+        const baseNodesPerPair = Math.floor(nodesToInsert / numberOfPairs); // 2
+        const remainder = nodesToInsert % numberOfPairs; // 0
+        
+        // For each pair of main points, add the first point and the intermediate points
+        for (let i = 0; i < newPoints.length - 1; i++) {
+          allPoints.push(newPoints[i]); // Add the main point
+          
+          // Calculate how many intermediate nodes to add
+          // Adjust this number based on your needs
+          const extraNode = i < remainder ? 1 : 0;
+          const numToInsert = baseNodesPerPair + extraNode;
+         
+          // Add intermediate points
+          const intermediatePoints = interpolatePoints(
+            newPoints[i], 
+            newPoints[i + 1], 
+            numToInsert
+          );
+          allPoints = [...allPoints, ...intermediatePoints];
+        }
+        
+        // Add the last main point
+        allPoints.push(newPoints[newPoints.length - 1]);
+
+      
+
+
+
+        setPoints(allPoints);
         setCompletedDays(newCompletedDays);
         setLoading(false);
       } catch (err) {
@@ -93,6 +153,7 @@ export default function ConstellationTracker({
     if (habitId) {
       fetchHabitData();
     }
+
   }, [habitId]);
 
   // Check if all days are completed
