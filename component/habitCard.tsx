@@ -20,12 +20,12 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
   useEffect(() => {
     // Generate constellation points based on viewport size
     setPoints([
-    { x: 10, y: 30 }, // Alpha Cancri (Acubens)
-    { x: 25, y: 50 }, // Beta Cancri (Altarf)
-    { x: 45, y: 65 }, // Gamma Cancri (Asellus Australis)
-    { x: 60, y: 75 }, // Delta Cancri (Asellus Borealis)
-    { x: 70, y: 45 }, // Epsilon Cancri (Tarf)
-    { x: 85, y: 30 }  // Zeta Cancri (Laudemont)
+      { x: 10, y: 40}, 
+      { x: 60, y: 45 }, 
+      { x: 80, y: 60 },
+      { x: 90, y: 80},
+      
+       
   ])
 
     // Check if we have saved progress in localStorage
@@ -68,7 +68,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
   }
 
   return (
-    <div  style={{ position: 'relative', width: '100%', height:'100%' ,border: '1px solid red'}}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', }}>
       <div
         style={{
           position: 'relative',
@@ -155,21 +155,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
 
     
 
-      <style>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 1; }
-        }
-        
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 1s ease-in-out;
-        }
-      `}</style>
+     
     </div>
   )
 }

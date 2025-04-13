@@ -35,7 +35,22 @@ function habitTracker() {
               animation: `twinkle ${1 + Math.random() *1}s ease-in-out infinite ${Math.random() * 3}s`,
             }}
           />
-        ))}
+       ))}
+         <style>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-in-out;
+        }
+      `}</style>
       </div>
      
       <div style={{
@@ -60,15 +75,17 @@ function habitTracker() {
       </div>
       
       <div style={{
-        flex:1
+        flex: 1,
+        paddingLeft: '1rem', 
+        paddingRight: '1rem',
       }}>
-        
+          <HabitDetails/>
       </div>
        
       </div>
     
        
-
+      
    
   );
 }
