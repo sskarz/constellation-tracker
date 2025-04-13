@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 body {
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   height: 100vh;
   background-color: midnightblue;
@@ -22,7 +22,7 @@ body {
 }
 
 .nav {
-  background-color: #333;
+  background-color: #081953;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -63,7 +63,7 @@ body {
 }
 
 .nav li:hover a {
-  background-color: #555;
+  background-color: #054068;
 }
 
 .terminal-text {
