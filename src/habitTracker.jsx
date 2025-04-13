@@ -20,19 +20,19 @@ function habitTracker() {
       alignItems: 'center',
       
     }}>
-      {Array.from({ length: 100 }).map((_, i) => (
+      {Array.from({ length: 800 }).map((_, i) => (
           <div
             key={`bg-star-${i}`}
             style={{
               position: 'absolute',
-              width: '1px',
-              height: '1px',
+              width: '2px',
+              height: '2px',
               backgroundColor: 'white',
               borderRadius: '50%',
               opacity: 0.7,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 5}s`,
+              animation: `twinkle ${1 + Math.random() * 2}s ease-in-out infinite ${Math.random() * 5}s`,
             }}
           />
         ))}
@@ -47,9 +47,9 @@ function habitTracker() {
 
       {/*Container For Constailation*/}
       <div style={{
-        width: '60%',
-        height: '60%',
-        border: '3px solid white'
+        width: '30%',
+        height: '30%',
+        //border: '3px solid white'
         // border: '1px dashed white', // Uncomment if you want to see it
       }}>
         <ConstellationTracker days={6}/>

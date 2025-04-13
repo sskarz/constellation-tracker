@@ -72,9 +72,9 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
       <div
         style={{
           position: 'relative',
-          backgroundColor: '#0f172a', // slate-900
+          backgroundColor: 'transparent', // slate-900
           borderRadius: '0.5rem', // rounded-lg
-          border: '1px solid #1e293b', // border-slate-800
+          //border: '1px solid #1e293b', // border-slate-800
           aspectRatio: '4 / 4',
           width: '100%',
           overflow: 'hidden',
@@ -134,32 +134,7 @@ export default function ConstellationTracker({ days }: ConstellationTrackerProps
           ))}
         </div>
 
-        {/* Background stars */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          overflow: 'hidden',
-        }}>
-        {Array.from({ length: 100 }).map((_, i) => (
-          <div
-            key={`bg-star-${i}`}
-            style={{
-              position: 'absolute',
-              width: '1px',
-              height: '1px',
-              backgroundColor: 'white',
-              borderRadius: '50%',
-              opacity: 0.7,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 5}s`,
-            }}
-          />
-        ))}
-      </div>
+       
 
     </div>
 
