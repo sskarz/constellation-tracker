@@ -1,21 +1,67 @@
-/* Full-page midnight blue background */
+
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
   height: 100vh;
   background-color: midnightblue;
+ 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Invisible centered box */
+
 .invisible-box {
   width: 50vw;
-  /* 50% of the viewport width */
   height: 50vh;
-  /* 50% of the viewport height */
-  /* visibility: hidden;  <- optional if you want it to be invisible to interactions */
+
   background-color: transparent;
   border: 2px dashed transparent;
-  /* optional: set border to visualize during development */
+
 }
+
+.nav {
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  height: 60px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.nav a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.nav li:hover a {
+  background-color: #555;
+}
+
