@@ -5,7 +5,7 @@ import '../component/star-node.tsx'
 import StarNode from '../component/star-node.tsx'
 import './index.css'
 
-//sad
+//sad significatn change
 function App() {
 
   return (
