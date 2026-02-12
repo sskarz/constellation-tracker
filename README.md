@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/constellation-banner.svg" alt="Constellation Tracker Banner" width="100%"/>
+  <img src="docs/constellation-tracker.png" alt="Constellation Tracker Banner" width="100%"/>
 </p>
 
 <h1 align="center">Constellation Tracker</h1>
@@ -9,6 +9,7 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/FullyHacks_2025-3rd_Place_🏆-FFD700" alt="FullyHacks 2025 - 3rd Place"/>
   <img src="https://img.shields.io/badge/React-18.2-61DAFB?logo=react&logoColor=white" alt="React"/>
   <img src="https://img.shields.io/badge/Vite-5.1-646CFF?logo=vite&logoColor=white" alt="Vite"/>
   <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS"/>
@@ -16,6 +17,8 @@
 </p>
 
 ---
+
+> **3rd Place Winner at [FullyHacks 2025](https://fullyhacks.acmcsuf.com/)** -- Built during the hackathon hosted by ACM at California State University, Fullerton.
 
 ## About
 
